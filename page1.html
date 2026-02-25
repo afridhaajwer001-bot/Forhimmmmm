@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You 💌</title>
+
+<style>
+body{
+  margin:0;
+  background:#f8c8dc;
+  font-family:Georgia, serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  overflow:hidden;
+}
+
+/* Envelope */
+.envelope{
+  position:relative;
+  width:250px;
+  height:180px;
+  background:#ffb6c1;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.envelope:hover{
+  transform:scale(1.05);
+}
+
+.flap{
+  position:absolute;
+  width:0;
+  height:0;
+  border-left:125px solid transparent;
+  border-right:125px solid transparent;
+  border-bottom:90px solid #ff69b4;
+  top:-90px;
+  left:0;
+  transition:0.8s;
+  transform-origin:top;
+}
+
+.envelope.open .flap{
+  transform:rotateX(180deg);
+}
+
+.text{
+  position:absolute;
+  width:100%;
+  text-align:center;
+  top:70px;
+  color:white;
+  font-size:18px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="envelope" onclick="openEnvelope()">
+  <div class="flap"></div>
+  <div class="text">Open Me 💖</div>
+</div>
+
+<script>
+function openEnvelope(){
+  document.querySelector(".envelope").classList.add("open");
+  
+  setTimeout(()=>{
+    window.location.href="page2.html";
+  },1000);
+}
+</script>
+
+</body>
+</html>

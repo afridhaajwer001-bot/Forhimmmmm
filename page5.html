@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Celebration 🎉</title>
+<style>
+body {
+  margin:0;
+  background:#f8c8dc;
+  font-family: Georgia, serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction: column;
+  height:100vh;
+  text-align:center;
+  overflow: hidden;
+}
+
+h1 {
+  color:#ff4081;
+  font-size:36px;
+  margin-bottom:10px;
+}
+
+p {
+  font-size:18px;
+  line-height:1.6;
+  max-width:500px;
+  margin-bottom:30px;
+}
+
+.heart {
+  position: fixed;
+  top: -20px;
+  color: rgba(255,105,180,0.6);
+  font-size:18px;
+  animation: fall linear forwards;
+}
+
+@keyframes fall { to { transform: translateY(110vh); } }
+
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  top: -10px;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+button {
+  padding:10px 25px;
+  border:none;
+  border-radius:50px;
+  background:#ff69b4;
+  color:white;
+  font-size:14px;
+  cursor:pointer;
+  transition:0.3s;
+  opacity:0;
+}
+
+button:hover {
+  background:#f06292;
+  box-shadow:0 0 15px rgba(240,98,146,0.5);
+}
+</style>
+</head>
+<body>
+
+<h1>Happy Birthday, My Love! 🎉💖</h1>
+<p>Alhamdulillah for your life today.  
+Another year of you… and I’m so grateful to be part of it.  
+I love you endlessly — always supporting you, always yours. 😌</p>
+
+<button id="replayBtn">Replay the Surprise 💌</button>
+
+<script>
+// Floating hearts
+function createHeart(){
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "❤";
+  heart.style.left = Math.random()*100 + "vw";
+  heart.style.animationDuration = (5 + Math.random()*3) + "s";
+  document.body.appendChild(heart);
+  setTimeout(()=>{ heart.remove(); }, 8000);
+}
+setInterval(createHeart, 700);
+
+// Confetti
+function launchConfetti() {
+  const colors = ['#ff3d7f','#ff69b4','#ffb6c1','#ffe066','#a0e7e5','#ffabf7'];
+  const interval = setInterval(() => {
+    const confetti = document.createElement('div');
+    confetti.classList.add('confetti');
+    confetti.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
+    confetti.style.left = Math.random() * window.innerWidth + 'px';
+    confetti.style.animationDuration = (3 + Math.random()*2) + 's';
+    document.body.appendChild(confetti);
+
+    confetti.animate([
+      { transform: `translateY(0) rotate(0deg)` },
+      { transform: `translateY(${window.innerHeight}px) rotate(${Math.random()*360}deg)` }
+    ], {
+      duration: 3000 + Math.random()*2000,
+      easing: 'linear'
+    });
+
+    setTimeout(()=>{ confetti.remove(); }, 5000);
+  }, 100);
+
+  setTimeout(()=>{ clearInterval(interval); }, 5000);
+}
+
+// Fade in button and launch confetti
+window.onload = function() {
+  const btn = document.getElementById("replayBtn");
+  setTimeout(()=>{ btn.style.opacity = 1; }, 500);
+  launchConfetti();
+
+  btn.addEventListener("click", ()=>{
+    window.location.href = "index.html"; // Go back to start
+  });
+}
+</script>
+
+</body>
+</html>

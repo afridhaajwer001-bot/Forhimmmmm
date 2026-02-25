@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Love Letter 💌</title>
+
+<style>
+body {
+  margin:0;
+  background:#f8c8dc;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  font-family:Georgia, serif;
+  overflow:hidden;
+}
+
+.letter-box {
+  background: linear-gradient(#fffdfa,#fffdfa),
+  repeating-linear-gradient(0deg, rgba(0,0,0,0.015) 0px, rgba(0,0,0,0.015) 1px, transparent 1px, transparent 4px);
+  padding:40px; 
+  border-radius:16px; 
+  box-shadow:0 25px 60px rgba(0,0,0,0.12);
+  min-height:240px; 
+  text-align:left; 
+  line-height:1.8; 
+  font-size:16px; 
+  letter-spacing:0.3px;
+  position:relative;
+}
+
+/* Floating hearts */
+.heart {
+  position:fixed;
+  top:-20px;
+  color:rgba(255,105,180,0.5);
+  animation:fall linear forwards;
+  font-size:18px;
+}
+
+@keyframes fall { to { transform: translateY(110vh); } }
+
+/* Next button */
+.letter-box button {
+  display:block;
+  margin:30px auto 0 auto;
+  padding:10px 25px;
+  border:none;
+  border-radius:50px;
+  background:#ff69b4;
+  color:white;
+  font-size:14px;
+  cursor:pointer;
+  opacity:0;
+  transition: opacity 1.5s ease;
+}
+
+.letter-box button:hover {
+  background:#f06292;
+  box-shadow:0 0 15px rgba(240,98,146,0.5);
+}
+</style>
+</head>
+<body>
+
+<div class="letter-box">
+  <p id="typedText"></p>
+  <button id="nextBtn" onclick="window.location.href='./page4.html'">Next: Cake Time 🎂</button>
+</div>
+
+<audio id="bgMusic" src="until-i-found-you.mp3"></audio>
+
+<script>
+const message = `Happy Birthday, My Love 🤍
+Alhamdulillah for your life today.
+Another year of you… and I’m just really grateful I get to be part of it.
+You came into my life so normally, but somehow you became my comfort.
+Even when we fight, even when I overthink, even when things get hard… I still choose you.
+I’m proud of you.
+For your hard work, your patience with me, and the way you try — even when things aren’t easy.
+I pray this year gives you success, peace of mind, and everything you’re working silently for.
+And no matter what happens, I’ll always be supporting you — maybe sometimes dramatic 😌 — but always yours.
+Forever,
+Yours Affi.`;
+
+let i = 0;
+const textEl = document.getElementById("typedText");
+const music = document.getElementById("bgMusic");
+const nextBtn = document.getElementById("nextBtn");
+
+// Typewriter effect
+function typeWriter() {
+  if(i < message.length){
+    textEl.innerHTML += message.charAt(i);
+    i++;
+    setTimeout(typeWriter,40);
+  } else {
+    music.pause();
+    // Fade in next button
+    setTimeout(()=>{ nextBtn.style.opacity = 1; }, 200);
+  }
+}
+
+// Floating hearts
+function createHeart(){
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "❤";
+  heart.style.left = Math.random()*100+"vw";
+  heart.style.animationDuration = (5 + Math.random()*3)+"s";
+  document.body.appendChild(heart);
+  setTimeout(()=>{ heart.remove(); },8000);
+}
+
+function startHearts(){ setInterval(createHeart,900); }
+
+// Start typing and hearts on load
+window.onload = function(){
+  music.play();
+  typeWriter();
+  startHearts();
+}
+</script>
+
+</body>
+</html>
